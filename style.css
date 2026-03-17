@@ -247,13 +247,13 @@ body {
 
 @media (max-width: 640px) {
   .app-shell {
-    width: min(100% - 8px, 100%);
-    padding: 8px 0 20px;
+    width: 100%;
+    padding: 0 0 16px;
   }
 
   .hero {
-    margin-bottom: 12px;
-    gap: 12px;
+    margin-bottom: 8px;
+    gap: 8px;
   }
 
   .panel, .hero-card, .question-card, .passage-box {
@@ -262,38 +262,50 @@ body {
   }
 
   .panel, .hero-card {
-    padding: 12px;
-    border-radius: 18px;
+    padding: 10px 8px;
+    border-radius: 0;
+    border-left: 0;
+    border-right: 0;
   }
 
   .question-card {
-    margin-top: 12px;
-    padding: 12px;
-    border-radius: 16px;
+    margin-top: 8px;
+    padding: 8px;
+    border-radius: 0;
+    border-left: 0;
+    border-right: 0;
+    background: transparent;
+    border-top: 0;
+    border-bottom: 0;
+    box-shadow: none;
   }
 
   .passage-box,
   .passage-text,
   .translation-text {
-    padding-left: 10px;
-    padding-right: 10px;
+    padding-left: 8px;
+    padding-right: 8px;
   }
 
   .passage-box {
-    margin-top: 12px;
-    border-radius: 14px;
+    margin-top: 10px;
+    border-radius: 0;
+    border-left: 0;
+    border-right: 0;
+    background: rgba(255, 255, 255, 0.18);
   }
 
   .passage-text {
     margin-top: 10px;
-    border-radius: 12px;
+    border-radius: 0;
     border-left: 0;
     border-right: 0;
+    background: rgba(255, 252, 246, 0.72);
   }
 
   .passage-text {
-    font-size: clamp(1.02rem, 4.8vw, 1.16rem);
-    line-height: 1.85;
+    font-size: clamp(1.04rem, 5vw, 1.18rem);
+    line-height: 1.82;
   }
 
   .hero h1 {
@@ -325,7 +337,7 @@ body {
   .audio-actions,
   .hero-actions,
   .chip-row {
-    gap: 10px;
+    gap: 8px;
   }
 
   .primary-btn,
@@ -352,5 +364,26 @@ body {
 
   .hero-card {
     display: none;
+  }
+
+  .hero-copy {
+    padding: 0 8px;
+  }
+
+  .practice-panel {
+    padding-left: 0;
+    padding-right: 0;
+    background: transparent;
+    border: 0;
+    box-shadow: none;
+    backdrop-filter: none;
+  }
+
+  .practice-head,
+  .question-type,
+  .question-note,
+  .feedback-box {
+    padding-left: 8px;
+    padding-right: 8px;
   }
 }
