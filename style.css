@@ -17,6 +17,8 @@ body {
   margin: 0;
   min-height: 100vh;
   overflow-x: hidden;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
   color: var(--text);
   font-family: "Noto Sans TC", sans-serif;
   background:
@@ -179,6 +181,7 @@ body {
   border-radius: 20px;
   background: rgba(255, 255, 255, 0.5);
   border: 1px solid rgba(82, 60, 40, 0.1);
+  min-width: 0;
 }
 .passage-title { margin: 8px 0 4px; font-size: 1.25rem; font-weight: 700; }
 .passage-text {
@@ -192,6 +195,9 @@ body {
   font-size: 1rem;
   width: 100%;
   max-width: 100%;
+  min-width: 0;
+  white-space: normal;
+  word-break: normal;
   overflow-wrap: break-word;
 }
 .translation-toggle { margin-top: 16px; }
@@ -206,16 +212,18 @@ body {
 
 .word-token {
   position: relative;
-  display: inline-block;
-  padding: 0 0.08em;
+  display: inline;
+  padding: 0;
   border-radius: 0.35em;
   transition: background-color 120ms ease, color 120ms ease, box-shadow 120ms ease, transform 120ms ease;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
 }
 .word-token.is-active {
   background: rgba(194, 90, 46, 0.18);
   color: #7a3116;
-  box-shadow: 0 0 0 2px rgba(194, 90, 46, 0.18);
-  transform: translateY(-1px);
+  box-shadow: 0 0 0 1px rgba(194, 90, 46, 0.14);
+  padding: 0 0.08em;
 }
 
 .feedback-box {
@@ -233,6 +241,8 @@ body {
   .practice-head, .feedback-box, .list-panel-head { flex-direction: column; align-items: stretch; }
   .layout { gap: 18px; }
   .panel, .hero-card { padding: 22px; }
+  .controls-panel { order: 2; }
+  .practice-panel { order: 1; }
 }
 
 @media (max-width: 640px) {
@@ -270,8 +280,8 @@ body {
   }
 
   .passage-text {
-    font-size: 1.06rem;
-    line-height: 1.9;
+    font-size: clamp(1.02rem, 4.8vw, 1.16rem);
+    line-height: 1.85;
   }
 
   .hero h1 {
@@ -318,7 +328,8 @@ body {
     padding: 13px 18px;
   }
 
-  .word-token {
-    padding: 0 0.04em;
+  .controls-panel .list-panel,
+  .controls-panel .hint-box {
+    display: none;
   }
 }
