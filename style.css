@@ -247,7 +247,8 @@ body {
 
 @media (max-width: 640px) {
   .app-shell {
-    width: 100%;
+    width: 100vw;
+    max-width: 100vw;
     padding: 0 0 12px;
   }
 
@@ -259,6 +260,11 @@ body {
   .panel, .hero-card, .question-card, .passage-box {
     width: 100%;
     min-width: 0;
+  }
+
+  .layout {
+    display: block;
+    width: 100%;
   }
 
   .panel, .hero-card {
@@ -283,8 +289,8 @@ body {
   .passage-box,
   .passage-text,
   .translation-text {
-    padding-left: 4px;
-    padding-right: 4px;
+    padding-left: 2px;
+    padding-right: 2px;
   }
 
   .passage-box {
@@ -301,7 +307,7 @@ body {
     margin-top: 8px;
     border-radius: 0;
     border: 0;
-    background: rgba(255, 252, 246, 0.52);
+    background: transparent;
   }
 
   .passage-text {
@@ -359,6 +365,7 @@ body {
   }
 
   .controls-panel {
+    display: none;
     padding-top: 6px;
     padding-bottom: 6px;
   }
@@ -372,6 +379,10 @@ body {
   }
 
   .practice-panel {
+    width: 100vw;
+    max-width: 100vw;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
     padding-left: 0;
     padding-right: 0;
     background: transparent;
@@ -384,8 +395,8 @@ body {
   .question-type,
   .question-note,
   .feedback-box {
-    padding-left: 4px;
-    padding-right: 4px;
+    padding-left: 2px;
+    padding-right: 2px;
   }
 
   .eyebrow,
@@ -405,7 +416,15 @@ body {
   }
 
   .audio-actions {
-    padding-left: 4px;
-    padding-right: 4px;
+    padding-left: 2px;
+    padding-right: 2px;
+  }
+
+  .question-card,
+  .passage-box,
+  .passage-text,
+  .translation-text {
+    margin-left: 0;
+    margin-right: 0;
   }
 }
