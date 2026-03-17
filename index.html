@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>英文聽力訓練</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-shell">
+    <header class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow">English Listening Trainer</p>
+        <h1>英文聽力訓練</h1>
+        <p class="hero-text">
+          專門用來練英文短文聽力。你可以選擇 2000、4000、10000 字級文章，
+          一邊聽全文，一邊看逐詞高亮，也可以視需要打開中文翻譯。
+        </p>
+        <div class="hero-actions">
+          <button class="primary-btn" id="start-button" type="button">開始播放</button>
+          <button class="ghost-btn" id="random-button" type="button">換一篇短文</button>
+          <button class="ghost-btn" id="favorite-button" type="button">收藏這篇</button>
+        </div>
+      </div>
+
+      <section class="hero-card">
+        <p class="card-label">目前狀態</p>
+        <h2 id="dashboard-level">2000 字級</h2>
+        <p id="dashboard-message">跟著逐詞高亮聽，就能更容易抓到英文節奏。</p>
+        <div class="stats-grid">
+          <article>
+            <span>文章長度</span>
+            <strong id="dashboard-words">約 100 字</strong>
+          </article>
+          <article>
+            <span>目前文章</span>
+            <strong id="dashboard-title">Article 1</strong>
+          </article>
+          <article>
+            <span>模式</span>
+            <strong>純聽力</strong>
+          </article>
+        </div>
+      </section>
+    </header>
+
+    <main class="layout">
+      <section class="panel controls-panel">
+        <div class="section-title">
+          <p class="section-kicker">Setup</p>
+          <h2>練習設定</h2>
+        </div>
+
+        <div class="control-group">
+          <p class="control-label">難度</p>
+          <div class="chip-row" id="level-buttons">
+            <button class="chip-btn is-active" type="button" data-level="easy">初級 2000</button>
+            <button class="chip-btn" type="button" data-level="medium">中級 4000</button>
+            <button class="chip-btn" type="button" data-level="hard">高級 10000</button>
+          </div>
+        </div>
+
+        <div class="control-group">
+          <p class="control-label">文章切換</p>
+          <div class="chip-row">
+            <button class="ghost-btn" id="next-button" type="button" disabled>下一篇文章</button>
+          </div>
+        </div>
+
+        <div class="control-group">
+          <p class="control-label">播放方式</p>
+          <label class="toggle-row">
+            <input type="checkbox" id="auto-repeat-toggle">
+            <span>自動重播同一篇 3 次</span>
+          </label>
+        </div>
+
+        <div class="hint-box">
+          <p class="hint-title">功能</p>
+          <ul class="hint-list">
+            <li>每個等級 50 篇短文</li>
+            <li>逐詞高亮</li>
+            <li>中文翻譯切換</li>
+            <li>收藏與清單快速切換</li>
+          </ul>
+        </div>
+
+        <div class="list-panel">
+          <div class="list-panel-head">
+            <p class="control-label">文章清單</p>
+            <button class="text-btn" id="favorites-filter-button" type="button">只看收藏</button>
+          </div>
+          <div class="article-list" id="article-list"></div>
+        </div>
+      </section>
+
+      <section class="panel practice-panel">
+        <div class="practice-head">
+          <div>
+            <p class="section-kicker">Practice</p>
+            <h2 id="session-title">短文聽力練習</h2>
+          </div>
+          <div class="progress-box">
+            <span id="progress-text">第 1 篇 / 共 50 篇</span>
+            <div class="progress-track" aria-hidden="true">
+              <div class="progress-bar" id="progress-bar"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="question-card">
+          <p class="question-type" id="question-type">準備播放</p>
+          <h3 id="question-text">請先選擇等級，再開始練習。</h3>
+          <p class="question-note" id="question-note">每篇文章都可以正常速度與慢速播放。</p>
+
+          <div class="passage-box">
+            <p class="passage-label">文章主題</p>
+            <p class="passage-title" id="passage-title">尚未開始</p>
+            <p class="passage-meta" id="passage-meta">按下開始後會載入文章。</p>
+            <div class="passage-text" id="passage-text" aria-live="polite">文章內容會顯示在這裡，播放時會逐詞高亮。</div>
+            <label class="toggle-row translation-toggle">
+              <input type="checkbox" id="translation-toggle">
+              <span>顯示中文翻譯</span>
+            </label>
+            <div class="translation-text hidden" id="translation-text">勾選後會顯示中文翻譯。</div>
+          </div>
+
+          <div class="audio-actions">
+            <button class="primary-btn" id="play-button" type="button" disabled>播放全文</button>
+            <button class="ghost-btn" id="slow-button" type="button" disabled>慢速播放</button>
+            <button class="ghost-btn" id="replay-button" type="button" disabled>重播文章</button>
+          </div>
+
+          <div class="feedback-box">
+            <p id="feedback-text">播放後，這裡會提示你目前的狀態。</p>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
