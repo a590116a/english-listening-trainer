@@ -248,12 +248,12 @@ body {
 @media (max-width: 640px) {
   .app-shell {
     width: 100%;
-    padding: 0 0 16px;
+    padding: 0 0 12px;
   }
 
   .hero {
-    margin-bottom: 8px;
-    gap: 8px;
+    margin-bottom: 4px;
+    gap: 4px;
   }
 
   .panel, .hero-card, .question-card, .passage-box {
@@ -262,7 +262,7 @@ body {
   }
 
   .panel, .hero-card {
-    padding: 10px 8px;
+    padding: 8px 4px;
     border-radius: 0;
     border-left: 0;
     border-right: 0;
@@ -270,7 +270,7 @@ body {
 
   .question-card {
     margin-top: 8px;
-    padding: 8px;
+    padding: 4px;
     border-radius: 0;
     border-left: 0;
     border-right: 0;
@@ -283,29 +283,30 @@ body {
   .passage-box,
   .passage-text,
   .translation-text {
-    padding-left: 8px;
-    padding-right: 8px;
+    padding-left: 4px;
+    padding-right: 4px;
   }
 
   .passage-box {
-    margin-top: 10px;
+    margin-top: 8px;
     border-radius: 0;
     border-left: 0;
     border-right: 0;
-    background: rgba(255, 255, 255, 0.18);
+    background: transparent;
+    border-top: 0;
+    border-bottom: 0;
   }
 
   .passage-text {
-    margin-top: 10px;
+    margin-top: 8px;
     border-radius: 0;
-    border-left: 0;
-    border-right: 0;
-    background: rgba(255, 252, 246, 0.72);
+    border: 0;
+    background: rgba(255, 252, 246, 0.52);
   }
 
   .passage-text {
-    font-size: clamp(1.04rem, 5vw, 1.18rem);
-    line-height: 1.82;
+    font-size: clamp(1.05rem, 5.1vw, 1.2rem);
+    line-height: 1.8;
   }
 
   .hero h1 {
@@ -358,8 +359,8 @@ body {
   }
 
   .controls-panel {
-    padding-top: 10px;
-    padding-bottom: 10px;
+    padding-top: 6px;
+    padding-bottom: 6px;
   }
 
   .hero-card {
@@ -367,7 +368,7 @@ body {
   }
 
   .hero-copy {
-    padding: 0 8px;
+    padding: 0 4px;
   }
 
   .practice-panel {
@@ -383,7 +384,28 @@ body {
   .question-type,
   .question-note,
   .feedback-box {
-    padding-left: 8px;
-    padding-right: 8px;
+    padding-left: 4px;
+    padding-right: 4px;
+  }
+
+  .eyebrow,
+  .hero-text,
+  .section-kicker,
+  .question-note,
+  .passage-meta {
+    display: none;
+  }
+
+  .hero h1,
+  .practice-head h2,
+  .question-card h3,
+  .passage-title {
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  .audio-actions {
+    padding-left: 4px;
+    padding-right: 4px;
   }
 }
