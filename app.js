@@ -1,8 +1,8 @@
 const FAVORITES_KEY = "english-listening-trainer-favorites";
 const LEVEL_CONFIG = {
-  easy: { label: "初級 2000", vocabBand: "2000 字級", rate: 0.78 },
-  medium: { label: "中級 4000", vocabBand: "4000 字級", rate: 0.88 },
-  hard: { label: "高級 10000", vocabBand: "10000 字級", rate: 0.96 }
+  easy: { label: "初級 2000", vocabBand: "2000 字級", rate: 1.0, slowRate: 0.45 },
+  medium: { label: "中級 4000", vocabBand: "4000 字級", rate: 0.95, slowRate: 0.55 },
+  hard: { label: "高級 10000", vocabBand: "10000 字級", rate: 0.9, slowRate: 0.6 }
 };
 
 const PEOPLE = [
@@ -75,6 +75,8 @@ const elements = {
 initialize();
 
 function initialize() {
+  primeVoices();
+
   bindChipGroup(elements.levelButtons, (button) => {
     state.selectedLevel = button.dataset.level;
     buildPlaylist();
@@ -93,7 +95,7 @@ function initialize() {
   elements.favoriteButton.addEventListener("click", toggleFavoriteCurrentArticle);
   elements.nextButton.addEventListener("click", goToNextArticle);
   elements.playButton.addEventListener("click", () => speakCurrentArticle(LEVEL_CONFIG[state.selectedLevel].rate));
-  elements.slowButton.addEventListener("click", () => speakCurrentArticle(0.72));
+  elements.slowButton.addEventListener("click", () => speakCurrentArticle(LEVEL_CONFIG[state.selectedLevel].slowRate));
   elements.replayButton.addEventListener("click", () => speakCurrentArticle(LEVEL_CONFIG[state.selectedLevel].rate));
   elements.autoRepeatToggle.addEventListener("change", () => {
     state.autoRepeatEnabled = elements.autoRepeatToggle.checked;
@@ -323,7 +325,9 @@ function speakCurrentArticle(rate) {
 
 function startSpeech(rate) {
   const utterance = new SpeechSynthesisUtterance(state.currentArticle.audioText);
-  utterance.lang = "en-US";
+  const voice = pickEnglishVoice();
+  utterance.lang = voice?.lang || "en-US";
+  if (voice) utterance.voice = voice;
   utterance.rate = rate;
   utterance.pitch = 1;
   utterance.volume = 1;
@@ -354,6 +358,45 @@ function startSpeech(rate) {
   };
   state.currentUtterance = utterance;
   window.speechSynthesis.speak(utterance);
+}
+
+function primeVoices() {
+  if (!("speechSynthesis" in window)) return;
+  window.speechSynthesis.getVoices();
+  window.speechSynthesis.addEventListener("voiceschanged", handleVoicesChanged, { once: true });
+}
+
+function handleVoicesChanged() {
+  window.speechSynthesis.getVoices();
+}
+
+function pickEnglishVoice() {
+  if (!("speechSynthesis" in window)) return null;
+  const voices = window.speechSynthesis.getVoices();
+  if (!voices.length) return null;
+
+  const englishVoices = voices.filter((voice) => /^en(-|_)/i.test(voice.lang || ""));
+  if (!englishVoices.length) return null;
+
+  const preferredPatterns = [
+    /en-us/i,
+    /en-gb/i,
+    /samantha/i,
+    /daniel/i,
+    /google.*english/i,
+    /microsoft.*english/i,
+    /english/i
+  ];
+
+  for (const pattern of preferredPatterns) {
+    const matchedVoice = englishVoices.find((voice) => {
+      const searchable = `${voice.name} ${voice.lang}`;
+      return pattern.test(searchable);
+    });
+    if (matchedVoice) return matchedVoice;
+  }
+
+  return englishVoices[0];
 }
 
 function renderPassageText(text) {
