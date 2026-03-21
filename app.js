@@ -30,6 +30,7 @@ const STORY_SCENARIOS = [
   {
     id: "s01",
     personId: "p01",
+    category: "campus",
     shortTitle: "Podcast Club",
     shortTitleZh: "播客社",
     setting: "the school podcast club",
@@ -54,6 +55,7 @@ const STORY_SCENARIOS = [
   {
     id: "s02",
     personId: "p02",
+    category: "public",
     shortTitle: "Museum Visit",
     shortTitleZh: "博物館參觀",
     setting: "a science museum",
@@ -78,6 +80,7 @@ const STORY_SCENARIOS = [
   {
     id: "s03",
     personId: "p03",
+    category: "travel",
     shortTitle: "Station Transfer",
     shortTitleZh: "車站轉乘",
     setting: "a busy train station",
@@ -102,6 +105,7 @@ const STORY_SCENARIOS = [
   {
     id: "s04",
     personId: "p04",
+    category: "daily",
     shortTitle: "Cooking Class",
     shortTitleZh: "料理課",
     setting: "a weekend cooking class",
@@ -126,6 +130,7 @@ const STORY_SCENARIOS = [
   {
     id: "s05",
     personId: "p05",
+    category: "public",
     shortTitle: "Beach Cleanup",
     shortTitleZh: "淨灘活動",
     setting: "a beach cleanup orientation",
@@ -150,6 +155,7 @@ const STORY_SCENARIOS = [
   {
     id: "s06",
     personId: "p06",
+    category: "travel",
     shortTitle: "Mountain Trail",
     shortTitleZh: "山路健行",
     setting: "a guided walk on a mountain trail",
@@ -174,6 +180,7 @@ const STORY_SCENARIOS = [
   {
     id: "s07",
     personId: "p07",
+    category: "public",
     shortTitle: "Clinic Talk",
     shortTitleZh: "診所說明",
     setting: "a clinic health talk",
@@ -198,6 +205,7 @@ const STORY_SCENARIOS = [
   {
     id: "s08",
     personId: "p08",
+    category: "daily",
     shortTitle: "Bookstore Event",
     shortTitleZh: "書店活動",
     setting: "a bookstore author event",
@@ -222,6 +230,7 @@ const STORY_SCENARIOS = [
   {
     id: "s09",
     personId: "p09",
+    category: "travel",
     shortTitle: "Hotel Check In",
     shortTitleZh: "旅館入住",
     setting: "a hotel front desk",
@@ -246,6 +255,7 @@ const STORY_SCENARIOS = [
   {
     id: "s10",
     personId: "p10",
+    category: "work",
     shortTitle: "Robotics Fair",
     shortTitleZh: "機器人展",
     setting: "a robotics fair",
@@ -277,10 +287,20 @@ const NARRATIVE_VARIANTS = [
   { id: "reflection", cue: "比較前後變化與個人心得" }
 ];
 
+const CATEGORY_CONFIG = {
+  all: { label: "全部" },
+  daily: { label: "日常" },
+  campus: { label: "校園" },
+  travel: { label: "旅遊" },
+  work: { label: "工作" },
+  public: { label: "公共場景" }
+};
+
 const ARTICLE_BANK = buildArticleBank();
 
 const state = {
   selectedLevel: "easy",
+  selectedCategory: "all",
   playlist: [],
   articleIndex: 0,
   currentArticle: null,
@@ -294,6 +314,7 @@ const state = {
 };
 
 const elements = {
+  controlsPanel: document.querySelector(".controls-panel"),
   startButton: document.querySelector("#start-button"),
   randomButton: document.querySelector("#random-button"),
   favoriteButton: document.querySelector("#favorite-button"),
@@ -305,6 +326,7 @@ const elements = {
   favoritesFilterButton: document.querySelector("#favorites-filter-button"),
   translationToggle: document.querySelector("#translation-toggle"),
   articleList: document.querySelector("#article-list"),
+  categoryButtons: [],
   levelButtons: [...document.querySelectorAll("#level-buttons .chip-btn")],
   progressText: document.querySelector("#progress-text"),
   progressBar: document.querySelector("#progress-bar"),
@@ -327,6 +349,7 @@ initialize();
 
 function initialize() {
   primeVoices();
+  mountCategoryControls();
 
   bindChipGroup(elements.levelButtons, (button) => {
     state.selectedLevel = button.dataset.level;
@@ -356,6 +379,32 @@ function initialize() {
 
   buildPlaylist();
   renderCurrentArticle();
+}
+
+function mountCategoryControls() {
+  if (!elements.controlsPanel || document.querySelector("#category-buttons")) return;
+
+  const levelGroup = document.querySelector("#level-buttons")?.closest(".control-group");
+  if (!levelGroup?.parentElement) return;
+
+  const group = document.createElement("div");
+  group.className = "control-group";
+  group.innerHTML = `
+    <p class="control-label">內容類型</p>
+    <div class="chip-row" id="category-buttons">
+      ${Object.entries(CATEGORY_CONFIG).map(([key, item], index) => `
+        <button class="chip-btn${index === 0 ? " is-active" : ""}" type="button" data-category="${key}">${item.label}</button>
+      `).join("")}
+    </div>
+  `;
+
+  levelGroup.insertAdjacentElement("afterend", group);
+  elements.categoryButtons = [...group.querySelectorAll(".chip-btn")];
+  bindChipGroup(elements.categoryButtons, (button) => {
+    state.selectedCategory = button.dataset.category;
+    buildPlaylist();
+    renderCurrentArticle();
+  });
 }
 
 function buildArticleBank() {
@@ -388,7 +437,11 @@ function buildScenarioArticle(level, serial, scenario, variant, person) {
       ? buildMediumScenarioContent(scenario, variant, person)
       : buildHardScenarioContent(scenario, variant, person);
 
-  return finalizeArticle(level, serial, { title: titleMap[variant.id], en: content.en, zh: content.zh }, cue);
+  return finalizeArticle(level, serial, { title: titleMap[variant.id], en: content.en, zh: content.zh }, cue, scenario.category);
+}
+
+function matchesSelectedCategory(article) {
+  return state.selectedCategory === "all" || article.category === state.selectedCategory;
 }
 
 function buildEasyScenarioContent(scenario, variant, person) {
@@ -570,10 +623,11 @@ function buildHardArticle(serial, theme, person) {
   return finalizeArticle("hard", serial, contentMap[theme.id], theme.cue);
 }
 
-function finalizeArticle(level, serial, content, cue) {
+function finalizeArticle(level, serial, content, cue, category = "all") {
   return {
     id: `${level}-${String(serial).padStart(2, "0")}`,
     level,
+    category,
     title: content.title,
     wordCount: countWords(content.en),
     audioText: content.en,
@@ -594,7 +648,10 @@ function bindChipGroup(buttons, onSelect) {
 
 function buildPlaylist() {
   const source = ARTICLE_BANK[state.selectedLevel];
-  const filtered = state.showFavoritesOnly ? source.filter((article) => state.favorites.includes(article.id)) : source;
+  const categoryFiltered = source.filter((article) => matchesSelectedCategory(article));
+  const filtered = state.showFavoritesOnly
+    ? categoryFiltered.filter((article) => state.favorites.includes(article.id))
+    : categoryFiltered;
   state.playlist = shuffle(filtered);
   state.articleIndex = 0;
 }
@@ -659,7 +716,9 @@ function updateDashboard(article) {
   elements.dashboardLevel.textContent = LEVEL_CONFIG[state.selectedLevel].vocabBand;
   elements.dashboardWords.textContent = article ? `${article.wordCount} 字` : "約 100 字";
   elements.dashboardTitle.textContent = article ? article.title : "Article 1";
-  elements.dashboardMessage.textContent = `${LEVEL_CONFIG[state.selectedLevel].label} 題庫共 ${ARTICLE_BANK[state.selectedLevel].length} 篇短文，可長期練習。`;
+  const categoryLabel = CATEGORY_CONFIG[state.selectedCategory]?.label || "全部";
+  const visibleCount = ARTICLE_BANK[state.selectedLevel].filter((entry) => matchesSelectedCategory(entry)).length;
+  elements.dashboardMessage.textContent = `${LEVEL_CONFIG[state.selectedLevel].label} 的 ${categoryLabel} 類型目前有 ${visibleCount} 篇短文可練習。`;
 }
 
 function speakCurrentArticle(rate) {
@@ -842,8 +901,8 @@ function updateFavoriteButton() {
 
 function renderArticleList() {
   const source = state.showFavoritesOnly
-    ? ARTICLE_BANK[state.selectedLevel].filter((article) => state.favorites.includes(article.id))
-    : ARTICLE_BANK[state.selectedLevel];
+    ? ARTICLE_BANK[state.selectedLevel].filter((article) => matchesSelectedCategory(article) && state.favorites.includes(article.id))
+    : ARTICLE_BANK[state.selectedLevel].filter((article) => matchesSelectedCategory(article));
 
   elements.articleList.innerHTML = "";
   if (!source.length) {
@@ -860,7 +919,8 @@ function renderArticleList() {
     button.className = "article-chip";
     if (state.currentArticle && state.currentArticle.id === article.id) button.classList.add("is-active");
     if (state.favorites.includes(article.id)) button.classList.add("is-favorite");
-    button.innerHTML = `<span class="article-chip-title">${index + 1}. ${article.title}</span><span class="article-chip-meta">${article.wordCount} 字${state.favorites.includes(article.id) ? "．已收藏" : ""}</span>`;
+    const categoryLabel = CATEGORY_CONFIG[article.category]?.label || "全部";
+    button.innerHTML = `<span class="article-chip-title">${index + 1}. ${article.title}</span><span class="article-chip-meta">${categoryLabel}．${article.wordCount} 字${state.favorites.includes(article.id) ? "．已收藏" : ""}</span>`;
     button.addEventListener("click", () => {
       const targetIndex = state.playlist.findIndex((item) => item.id === article.id);
       if (targetIndex >= 0) {
