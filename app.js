@@ -26,6 +26,257 @@ const THEMES = [
   { id: "t05", cue: "抓原因、做法與最後效果。" }
 ];
 
+const STORY_SCENARIOS = [
+  {
+    id: "s01",
+    personId: "p01",
+    shortTitle: "Podcast Club",
+    shortTitleZh: "播客社",
+    setting: "the school podcast club",
+    settingZh: "學校播客社",
+    place: "the media room",
+    placeZh: "媒體教室",
+    topic: "city parks",
+    topicZh: "城市公園",
+    activity: "edit a short episode",
+    activityZh: "剪輯一段短節目",
+    soundA: "the host's opening question",
+    soundAZh: "主持人的開場問題",
+    soundB: "the guest's final example",
+    soundBZh: "來賓最後舉的例子",
+    challenge: "the interview section suddenly became faster",
+    challengeZh: "訪談段落的語速突然變快",
+    support: "the club leader",
+    supportZh: "社團幹部",
+    takeaway: "marking key words before replaying helped the main point stand out",
+    takeawayZh: "先標出關鍵字再重播，能讓主旨更清楚"
+  },
+  {
+    id: "s02",
+    personId: "p02",
+    shortTitle: "Museum Visit",
+    shortTitleZh: "博物館參觀",
+    setting: "a science museum",
+    settingZh: "科學博物館",
+    place: "the audio guide area",
+    placeZh: "語音導覽區",
+    topic: "ocean energy",
+    topicZh: "海洋能源",
+    activity: "follow a guided tour",
+    activityZh: "跟著導覽參觀",
+    soundA: "the guide's explanation beside the first model",
+    soundAZh: "導覽員在第一個模型旁的說明",
+    soundB: "a short question from a visitor",
+    soundBZh: "一位參觀者提出的簡短問題",
+    challenge: "some technical terms sounded unfamiliar",
+    challengeZh: "有些技術名詞聽起來很陌生",
+    support: "a museum volunteer",
+    supportZh: "博物館志工",
+    takeaway: "seeing the objects while listening made difficult words easier to remember",
+    takeawayZh: "一邊看展品一邊聽說明，讓難字更容易記住"
+  },
+  {
+    id: "s03",
+    personId: "p03",
+    shortTitle: "Station Transfer",
+    shortTitleZh: "車站轉乘",
+    setting: "a busy train station",
+    settingZh: "繁忙的火車站",
+    place: "the transfer platform",
+    placeZh: "轉乘月台",
+    topic: "platform changes",
+    topicZh: "月台變更資訊",
+    activity: "follow public announcements",
+    activityZh: "聽懂站內廣播",
+    soundA: "the platform announcement",
+    soundAZh: "月台廣播",
+    soundB: "a staff member's safety reminder",
+    soundBZh: "站務員的安全提醒",
+    challenge: "the message was short and repeated only once",
+    challengeZh: "訊息很短，而且只重複一次",
+    support: "a station worker",
+    supportZh: "站務員",
+    takeaway: "catching the first key noun often made the rest of the sentence easier",
+    takeawayZh: "只要先抓到第一個關鍵名詞，後面整句就比較好懂"
+  },
+  {
+    id: "s04",
+    personId: "p04",
+    shortTitle: "Cooking Class",
+    shortTitleZh: "料理課",
+    setting: "a weekend cooking class",
+    settingZh: "週末料理課",
+    place: "the practice kitchen",
+    placeZh: "實作廚房",
+    topic: "fruit sandwiches",
+    topicZh: "水果三明治",
+    activity: "follow step by step instructions",
+    activityZh: "跟著步驟完成料理",
+    soundA: "the teacher's first instruction",
+    soundAZh: "老師的第一個指令",
+    soundB: "the warning about timing",
+    soundBZh: "關於時間控制的提醒",
+    challenge: "several actions were packed into one sentence",
+    challengeZh: "有些句子一次塞進了好幾個動作",
+    support: "a class partner",
+    supportZh: "同組夥伴",
+    takeaway: "listening for action verbs made the sequence much clearer",
+    takeawayZh: "先抓動作動詞，整個流程順序就清楚很多"
+  },
+  {
+    id: "s05",
+    personId: "p05",
+    shortTitle: "Beach Cleanup",
+    shortTitleZh: "淨灘活動",
+    setting: "a beach cleanup orientation",
+    settingZh: "淨灘說明會",
+    place: "the meeting point near the shore",
+    placeZh: "海邊集合點",
+    topic: "team rules",
+    topicZh: "分組規則",
+    activity: "listen to volunteer instructions",
+    activityZh: "聽志工說明活動規則",
+    soundA: "the safety rule at the beginning",
+    soundAZh: "一開始的安全規則",
+    soundB: "the closing reminder about sorting trash",
+    soundBZh: "最後關於分類垃圾的提醒",
+    challenge: "wind and waves made the sound less clear",
+    challengeZh: "海風和浪聲讓聲音變得不太清楚",
+    support: "the team captain",
+    supportZh: "小隊長",
+    takeaway: "staying calm in a noisy place helped the important details stay clear",
+    takeawayZh: "在吵雜環境裡保持冷靜，反而更能抓到重要細節"
+  },
+  {
+    id: "s06",
+    personId: "p06",
+    shortTitle: "Mountain Trail",
+    shortTitleZh: "山路健行",
+    setting: "a guided walk on a mountain trail",
+    settingZh: "山路導覽健行",
+    place: "the forest path",
+    placeZh: "林間步道",
+    topic: "weather changes",
+    topicZh: "天氣變化",
+    activity: "listen to route updates",
+    activityZh: "聽懂路線更新和提醒",
+    soundA: "the guide's weather report",
+    soundAZh: "導覽員對天氣的說明",
+    soundB: "the direction given at a fork in the trail",
+    soundBZh: "岔路口的方向指示",
+    challenge: "the guide mixed place names with instructions",
+    challengeZh: "導覽員會把地名和指令混在同一句裡",
+    support: "another hiker",
+    supportZh: "同行山友",
+    takeaway: "remembering landmarks made spoken directions easier to follow",
+    takeawayZh: "先記住地標，口語方向說明就會好跟很多"
+  },
+  {
+    id: "s07",
+    personId: "p07",
+    shortTitle: "Clinic Talk",
+    shortTitleZh: "診所說明",
+    setting: "a clinic health talk",
+    settingZh: "診所健康說明",
+    place: "the waiting area",
+    placeZh: "候診區",
+    topic: "sleep habits",
+    topicZh: "睡眠習慣",
+    activity: "listen to practical health advice",
+    activityZh: "聽懂實用的健康建議",
+    soundA: "the doctor's short explanation",
+    soundAZh: "醫師的簡短說明",
+    soundB: "a patient's follow up question",
+    soundBZh: "病人的追問",
+    challenge: "the speaker used both advice and examples in one answer",
+    challengeZh: "醫師常把建議和例子一起講在同一個回答裡",
+    support: "the nurse",
+    supportZh: "護理師",
+    takeaway: "grouping ideas into problem, advice, and example reduced confusion",
+    takeawayZh: "把內容分成問題、建議、例子三段，會比較不混亂"
+  },
+  {
+    id: "s08",
+    personId: "p08",
+    shortTitle: "Bookstore Event",
+    shortTitleZh: "書店活動",
+    setting: "a bookstore author event",
+    settingZh: "書店作家分享會",
+    place: "the reading corner",
+    placeZh: "閱讀角落",
+    topic: "travel writing",
+    topicZh: "旅行寫作",
+    activity: "listen to a live talk",
+    activityZh: "聽現場分享",
+    soundA: "the author's story about a train ride",
+    soundAZh: "作家講述火車旅行的故事",
+    soundB: "the answer during the audience question time",
+    soundBZh: "問答時間裡的回答",
+    challenge: "the speaker changed topics smoothly without obvious pauses",
+    challengeZh: "講者換話題時沒有很明顯的停頓",
+    support: "a bookstore staff member",
+    supportZh: "書店店員",
+    takeaway: "listening for transition words made the structure easier to hear",
+    takeawayZh: "專心抓轉折詞，整段內容的結構就更容易聽出來"
+  },
+  {
+    id: "s09",
+    personId: "p09",
+    shortTitle: "Hotel Check In",
+    shortTitleZh: "旅館入住",
+    setting: "a hotel front desk",
+    settingZh: "旅館櫃台",
+    place: "the check in counter",
+    placeZh: "入住櫃台",
+    topic: "room details",
+    topicZh: "房間資訊",
+    activity: "confirm travel information",
+    activityZh: "確認住宿資訊",
+    soundA: "the welcome message from the clerk",
+    soundAZh: "櫃台人員的接待說明",
+    soundB: "the explanation about breakfast and check out time",
+    soundBZh: "早餐與退房時間的說明",
+    challenge: "several numbers appeared very quickly",
+    challengeZh: "裡面一下子出現了好幾個數字",
+    support: "the front desk clerk",
+    supportZh: "櫃台人員",
+    takeaway: "listening for numbers and labels first made service English less stressful",
+    takeawayZh: "先抓數字和標籤詞，服務英文就不會那麼有壓力"
+  },
+  {
+    id: "s10",
+    personId: "p10",
+    shortTitle: "Robotics Fair",
+    shortTitleZh: "機器人展",
+    setting: "a robotics fair",
+    settingZh: "機器人展",
+    place: "the demo area",
+    placeZh: "示範區",
+    topic: "smart delivery robots",
+    topicZh: "智慧配送機器人",
+    activity: "listen to short product demos",
+    activityZh: "聽懂產品示範",
+    soundA: "the presenter's first demonstration line",
+    soundAZh: "講者示範時的第一句介紹",
+    soundB: "the comparison between two robot models",
+    soundBZh: "兩款機器人的比較說明",
+    challenge: "the speaker used many short descriptive phrases in a row",
+    challengeZh: "講者會連續使用很多短短的描述片語",
+    support: "an event guide",
+    supportZh: "展場導覽員",
+    takeaway: "hearing repeated descriptive patterns made technical content easier to follow",
+    takeawayZh: "只要抓到重複出現的描述模式，技術內容就沒有那麼難"
+  }
+];
+
+const NARRATIVE_VARIANTS = [
+  { id: "routine", cue: "注意流程與順序訊號" },
+  { id: "problem", cue: "留意問題、原因與解法" },
+  { id: "observation", cue: "抓場景細節與說話內容的對應" },
+  { id: "notes", cue: "整理重點、例子與結論" },
+  { id: "reflection", cue: "比較前後變化與個人心得" }
+];
+
 const ARTICLE_BANK = buildArticleBank();
 
 const state = {
@@ -109,15 +360,116 @@ function initialize() {
 
 function buildArticleBank() {
   const bank = { easy: [], medium: [], hard: [] };
-  THEMES.forEach((theme, themeIndex) => {
-    PEOPLE.forEach((person, personIndex) => {
-      const serial = themeIndex * PEOPLE.length + personIndex + 1;
-      bank.easy.push(buildArticle("easy", serial, theme, person));
-      bank.medium.push(buildArticle("medium", serial, theme, person));
-      bank.hard.push(buildArticle("hard", serial, theme, person));
+  STORY_SCENARIOS.forEach((scenario, scenarioIndex) => {
+    const person = PEOPLE.find((item) => item.id === scenario.personId) || PEOPLE[scenarioIndex % PEOPLE.length];
+    NARRATIVE_VARIANTS.forEach((variant, variantIndex) => {
+      const serial = scenarioIndex * NARRATIVE_VARIANTS.length + variantIndex + 1;
+      bank.easy.push(buildScenarioArticle("easy", serial, scenario, variant, person));
+      bank.medium.push(buildScenarioArticle("medium", serial, scenario, variant, person));
+      bank.hard.push(buildScenarioArticle("hard", serial, scenario, variant, person));
     });
   });
   return bank;
+}
+
+function buildScenarioArticle(level, serial, scenario, variant, person) {
+  const titleMap = {
+    routine: `${person.name} at ${scenario.shortTitle}`,
+    problem: `${person.name} Solved a Listening Problem`,
+    observation: `What ${person.name} Heard at ${scenario.shortTitle}`,
+    notes: `${person.name}'s Notes from ${scenario.shortTitle}`,
+    reflection: `How ${person.name} Grew Through ${scenario.shortTitle}`
+  };
+
+  const cue = `${scenario.shortTitleZh}主題，${variant.cue}`;
+  const content = level === "easy"
+    ? buildEasyScenarioContent(scenario, variant, person)
+    : level === "medium"
+      ? buildMediumScenarioContent(scenario, variant, person)
+      : buildHardScenarioContent(scenario, variant, person);
+
+  return finalizeArticle(level, serial, { title: titleMap[variant.id], en: content.en, zh: content.zh }, cue);
+}
+
+function buildEasyScenarioContent(scenario, variant, person) {
+  const templates = {
+    routine: {
+      en: `${person.name} joined ${scenario.setting} in ${person.city}. The activity took place at ${scenario.place}. First, ${person.name} listened to ${scenario.soundA}. Next, ${person.name} tried to ${scenario.activity}. Later, ${scenario.soundB} helped ${person.name} understand more about ${scenario.topic}. The task was simple, but it still needed careful listening. With help from ${scenario.support}, ${person.name} stayed calm and followed each step. At the end, ${person.name} felt that ${scenario.takeaway}.`,
+      zh: `${person.name} 在${person.cityZh}參加了${scenario.settingZh}，活動地點在${scenario.placeZh}。一開始，${person.name} 先聽${scenario.soundAZh}。接著，${person.name} 試著${scenario.activityZh}。後來，${scenario.soundBZh} 幫助${person.name} 更了解${scenario.topicZh}。這個任務看起來不難，但還是需要仔細聽。因為有${scenario.supportZh}的幫忙，${person.name} 能保持冷靜並跟上每個步驟。到了最後，${person.name} 覺得${scenario.takeawayZh}。`
+    },
+    problem: {
+      en: `${person.name} went to ${scenario.setting} with the goal of improving listening. At first, there was one problem: ${scenario.challenge}. Because of that, ${person.name} missed part of ${scenario.soundA}. Instead of giving up, ${person.name} listened again, watched the speaker closely, and asked ${scenario.support} for one short explanation. After that, ${scenario.soundB} sounded much clearer. By the end of the activity, ${person.name} could follow the main idea about ${scenario.topic}. This experience taught ${person.name} that ${scenario.takeaway}.`,
+      zh: `${person.name} 參加${scenario.settingZh}，目標是提升聽力。一開始出現了一個問題：${scenario.challengeZh}。因此，${person.name} 漏聽了${scenario.soundAZh}的一部分。${person.name} 沒有放棄，而是再聽一次、仔細看著說話的人，並請${scenario.supportZh}簡單說明一下。之後，${scenario.soundBZh} 就清楚多了。活動結束前，${person.name} 已經能聽懂關於${scenario.topicZh}的主要意思。這次經驗讓${person.name} 明白，${scenario.takeawayZh}。`
+    },
+    observation: {
+      en: `${person.name} noticed many small details during ${scenario.setting}. The place was ${scenario.place}, and the topic was ${scenario.topic}. ${person.name} heard ${scenario.soundA} near the beginning and ${scenario.soundB} later on. Even when the sound changed, ${person.name} kept listening for key words. Step by step, the whole message became easier to understand. ${person.name} also saw how other people reacted, which gave extra clues. After the session, ${person.name} told ${scenario.support} that ${scenario.takeaway}.`,
+      zh: `${person.name} 在${scenario.settingZh}中注意到很多小細節。地點是在${scenario.placeZh}，主題是${scenario.topicZh}。一開始，${person.name} 聽到${scenario.soundAZh}；後來又聽到${scenario.soundBZh}。即使聲音和內容有變化，${person.name} 還是一直去抓關鍵字。慢慢地，整段內容就變得比較容易懂了。${person.name} 也觀察到其他人的反應，這些也成了額外線索。結束後，${person.name} 跟${scenario.supportZh}說，${scenario.takeawayZh}。`
+    },
+    notes: {
+      en: `${person.name} prepared a few simple notes before joining ${scenario.setting}. The notes had three parts: the topic, the important sounds, and the final message. During the activity, ${person.name} wrote down ${scenario.soundA}, ${scenario.soundB}, and one useful idea about ${scenario.topic}. This made the listening task feel more organized. When ${scenario.challenge}, ${person.name} still had something clear to focus on. After reviewing the notes with ${scenario.support}, ${person.name} understood the session much better and felt that ${scenario.takeaway}.`,
+      zh: `${person.name} 在參加${scenario.settingZh}前，先準備了幾個簡單筆記欄位，分成主題、重要聲音、最後結論三部分。活動進行時，${person.name} 記下了${scenario.soundAZh}、${scenario.soundBZh}，以及一個和${scenario.topicZh}有關的重要想法。這讓整個聽力任務變得更有條理。就算${scenario.challengeZh}，${person.name} 還是有明確的重點可以抓。和${scenario.supportZh}一起回顧筆記後，${person.name} 更懂整場內容，也覺得${scenario.takeawayZh}。`
+    },
+    reflection: {
+      en: `Before joining ${scenario.setting}, ${person.name} did not feel very confident about listening. However, this activity in ${person.city} slowly changed that feeling. ${person.name} listened to ${scenario.soundA}, followed ${scenario.soundB}, and tried to understand the whole topic of ${scenario.topic}. There were moments when ${scenario.challenge}, but ${person.name} kept going with support from ${scenario.support}. After the activity, ${person.name} felt more relaxed, more focused, and more willing to try again. For ${person.name}, the best lesson was that ${scenario.takeaway}.`,
+      zh: `在參加${scenario.settingZh}之前，${person.name} 對自己的聽力其實沒有太大信心。不過，這場在${person.cityZh}的活動慢慢改變了這種感覺。${person.name} 聽了${scenario.soundAZh}，也跟著理解${scenario.soundBZh}，並努力掌握${scenario.topicZh}這個主題。過程中雖然有${scenario.challengeZh}的時候，但${person.name} 在${scenario.supportZh}的幫助下還是持續下去。活動結束後，${person.name} 覺得自己更放鬆、更專心，也更願意再挑戰一次。對${person.name} 來說，最重要的收穫就是${scenario.takeawayZh}。`
+    }
+  };
+
+  return templates[variant.id];
+}
+
+function buildMediumScenarioContent(scenario, variant, person) {
+  const templates = {
+    routine: {
+      en: `${person.name} used ${scenario.setting} in ${person.city} as a structured listening practice rather than a casual activity. In ${scenario.place}, ${person.name} first focused on ${scenario.soundA}, then moved on to ${scenario.activity}, and later checked understanding through ${scenario.soundB}. Because the topic centered on ${scenario.topic}, the session offered both useful vocabulary and clear context. The pace was manageable, yet it still demanded attention. With guidance from ${scenario.support}, ${person.name} learned to follow the sequence more steadily and discovered that ${scenario.takeaway}.`,
+      zh: `${person.name} 把${person.cityZh}的${scenario.settingZh}當成一場有結構的聽力練習，而不只是隨便參加的活動。在${scenario.placeZh}裡，${person.name} 先專心聽${scenario.soundAZh}，接著進行${scenario.activityZh}，再透過${scenario.soundBZh}檢查自己是否理解正確。由於整場內容圍繞著${scenario.topicZh}，因此不但有實用字詞，也有清楚的情境可依靠。整體節奏雖然不算太快，卻仍然需要注意力。在${scenario.supportZh}的引導下，${person.name} 更穩定地跟上整個流程，也發現${scenario.takeawayZh}。`
+    },
+    problem: {
+      en: `${person.name} expected ${scenario.setting} to be helpful, but one difficulty appeared almost immediately: ${scenario.challenge}. As a result, the first part, especially ${scenario.soundA}, felt incomplete and slightly frustrating. Instead of relying on guesswork alone, ${person.name} changed strategy by listening for repeated words, checking the speaker's direction, and confirming one point with ${scenario.support}. Once that adjustment was made, ${scenario.soundB} became far easier to follow. By the time the session ended, ${person.name} understood the core message about ${scenario.topic} and came away convinced that ${scenario.takeaway}.`,
+      zh: `${person.name} 原本就預期${scenario.settingZh}會對自己有幫助，但困難幾乎一開始就出現了：${scenario.challengeZh}。因此，尤其是${scenario.soundAZh}那一段，聽起來不完整，也讓人有點挫折。${person.name} 沒有只靠猜測，而是改變策略，開始去聽重複出現的字、觀察講者指向哪裡，並向${scenario.supportZh}確認一個重點。調整之後，${scenario.soundBZh} 就變得容易理解多了。等到整場結束時，${person.name} 已經能掌握${scenario.topicZh}的核心訊息，也更相信${scenario.takeawayZh}。`
+    },
+    observation: {
+      en: `${person.name} treated ${scenario.setting} as a chance to observe how spoken English works inside a real setting. From the beginning at ${scenario.place}, ${person.name} paid attention not only to words, but also to timing, emphasis, and how ${scenario.soundA} connected with ${scenario.soundB}. Because the discussion stayed close to ${scenario.topic}, visual clues and background knowledge often supported the listening process. Even when ${scenario.challenge}, the larger structure still remained clear. Afterward, ${person.name} reflected that the most useful insight was simple: ${scenario.takeaway}.`,
+      zh: `${person.name} 把${scenario.settingZh}當成一次觀察真實英語如何運作的機會。從在${scenario.placeZh}開始的那一刻起，${person.name} 注意的不只是字面意思，還包括時間點、重音，以及${scenario.soundAZh}和${scenario.soundBZh}之間是怎麼連起來的。因為整段內容始終圍繞${scenario.topicZh}，所以現場畫面和背景知識常常能幫忙理解。即使${scenario.challengeZh}，整體結構仍然算清楚。活動之後，${person.name} 回想起來，最有用的體會其實很簡單：${scenario.takeawayZh}。`
+    },
+    notes: {
+      en: `${person.name} entered ${scenario.setting} with a simple note taking plan. Instead of trying to write everything down, ${person.name} organized information into three parts: the main topic, the strongest example, and the final takeaway. That method worked especially well in ${scenario.place}, where ${scenario.soundA} introduced the topic and ${scenario.soundB} added a clearer example. When ${scenario.challenge}, the notes still gave ${person.name} a stable frame for understanding. Reviewing the page afterward with ${scenario.support} showed that ${scenario.takeaway}.`,
+      zh: `${person.name} 參加${scenario.settingZh}前，先設定了簡單的筆記策略。${person.name} 沒有想把所有內容都寫下來，而是把資訊分成主題、最明顯的例子和最後結論三部分。這個方法在${scenario.placeZh}特別有效，因為${scenario.soundAZh}負責帶出主題，而${scenario.soundBZh}又補上更清楚的例子。就算${scenario.challengeZh}，這份筆記架構還是讓${person.name} 有一個穩定的理解框架。事後和${scenario.supportZh}一起回顧時，${person.name} 更確認了${scenario.takeawayZh}。`
+    },
+    reflection: {
+      en: `${person.name}'s experience at ${scenario.setting} gradually changed the way listening practice felt. Earlier, ${person.name} often believed that missing one phrase meant losing the whole message. During this session, however, ${person.name} learned to recover by following the topic of ${scenario.topic}, connecting ${scenario.soundA} with ${scenario.soundB}, and staying patient when ${scenario.challenge}. Support from ${scenario.support} also made the process less stressful. In the end, the activity did more than provide English input. It helped ${person.name} realize that ${scenario.takeaway}.`,
+      zh: `${person.name} 在${scenario.settingZh}中的經驗，慢慢改變了自己對聽力練習的感受。以前，${person.name} 常以為只要漏掉一句，整段就完了。不過在這次活動裡，${person.name} 學會透過${scenario.topicZh}這個主題，把${scenario.soundAZh}和${scenario.soundBZh}連起來，並在${scenario.challengeZh}時仍保持耐心。再加上${scenario.supportZh}的幫助，整個過程也沒那麼有壓力。最後，這場活動不只是提供英文輸入而已，更讓${person.name} 理解到${scenario.takeawayZh}。`
+    }
+  };
+
+  return templates[variant.id];
+}
+
+function buildHardScenarioContent(scenario, variant, person) {
+  const templates = {
+    routine: {
+      en: `${person.name} approached ${scenario.setting} in ${person.city} as a deliberately structured listening laboratory. Positioned in ${scenario.place}, ${person.name} began by tracing ${scenario.soundA}, shifted to ${scenario.activity}, and then used ${scenario.soundB} to verify interpretation of the broader theme of ${scenario.topic}. What made the experience valuable was not difficulty alone, but the way context, sequence, and repetition reinforced each other. With occasional guidance from ${scenario.support}, ${person.name} developed a steadier method for processing connected speech and concluded that ${scenario.takeaway}.`,
+      zh: `${person.name} 把${person.cityZh}的${scenario.settingZh}當成一個刻意安排的聽力實驗場。在${scenario.placeZh}裡，${person.name} 先追蹤${scenario.soundAZh}的內容，接著進入${scenario.activityZh}，再透過${scenario.soundBZh}去驗證自己對${scenario.topicZh}這個大主題的理解。這次經驗真正有價值的地方，不只是它有難度，而是情境、順序與重複三者會彼此支撐。配合${scenario.supportZh}偶爾提供的協助，${person.name} 逐漸建立出更穩定的連續語流處理方法，也更確定${scenario.takeawayZh}。`
+    },
+    problem: {
+      en: `${person.name} entered ${scenario.setting} hoping for useful practice, yet quickly ran into a familiar obstacle: ${scenario.challenge}. Because the difficulty emerged early, ${scenario.soundA} initially felt fragmented, and the overall message seemed unstable. Rather than treating that breakdown as failure, ${person.name} responded analytically by identifying repeated language, checking where attention should be directed, and confirming one uncertain point with ${scenario.support}. That shift in method transformed the second half of the session. By the time ${scenario.soundB} appeared, ${person.name} was no longer chasing every word, but tracking the logic behind the discussion of ${scenario.topic}. The result was a far more confident understanding and a stronger belief that ${scenario.takeaway}.`,
+      zh: `${person.name} 參加${scenario.settingZh}時原本期待能得到紮實的練習，但很快就遇到一個熟悉的障礙：${scenario.challengeZh}。由於困難出現得很早，${scenario.soundAZh}一開始聽起來支離破碎，整體訊息也顯得不穩定。${person.name} 沒有把這種斷裂感當成失敗，而是用更有分析性的方式應對：辨認重複語言、確認注意力該放在哪裡，並向${scenario.supportZh}核對一個不確定的重點。這種方法上的轉變，讓後半段的理解完全不同。等到${scenario.soundBZh}出現時，${person.name} 已不再追逐每個單字，而是在追蹤關於${scenario.topicZh}的整體邏輯。最後的結果是不但理解更有信心，也更相信${scenario.takeawayZh}。`
+    },
+    observation: {
+      en: `${person.name} used ${scenario.setting} as an opportunity to study how meaning is assembled in live speech. From the start in ${scenario.place}, ${person.name} noticed that ${scenario.soundA} established a frame, while ${scenario.soundB} either expanded or clarified it. Because the topic remained tied to ${scenario.topic}, physical surroundings and visible actions repeatedly supported comprehension. Even when ${scenario.challenge}, the session did not collapse into noise; instead, it highlighted how listeners rely on structure, expectation, and selective attention. Looking back, ${person.name} considered the experience persuasive evidence that ${scenario.takeaway}.`,
+      zh: `${person.name} 把${scenario.settingZh}當成一次研究現場語音如何組成意義的機會。從在${scenario.placeZh}開始的那一刻起，${person.name} 就注意到${scenario.soundAZh}其實建立了一個理解框架，而${scenario.soundBZh}則是在擴展或澄清這個框架。由於整體主題始終圍繞${scenario.topicZh}，現場環境與可見動作便一再支撐理解。即使${scenario.challengeZh}，整場內容也沒有因此崩成雜音，反而更凸顯出聽者其實會依賴結構、預期與選擇性注意力來理解。回頭看時，${person.name} 覺得這次經驗幾乎可算是${scenario.takeawayZh}的有力證據。`
+    },
+    notes: {
+      en: `${person.name} arrived at ${scenario.setting} with a more selective note taking strategy than before. Instead of recording everything, ${person.name} mapped the session around topic, support, and conclusion. In practice, that meant marking ${scenario.soundA} as the framing idea, treating ${scenario.soundB} as evidence or illustration, and linking both back to ${scenario.topic}. The method proved especially useful when ${scenario.challenge}, because the notes preserved structure even when individual phrases blurred together. Reviewing those notes later with ${scenario.support} confirmed that the session had been understood more accurately than it first felt. For ${person.name}, that reinforced the idea that ${scenario.takeaway}.`,
+      zh: `${person.name} 這次帶著比以前更有選擇性的筆記策略參加${scenario.settingZh}。${person.name} 不再試圖記下所有內容，而是把整場資訊整理成主題、支撐內容與結論三個層次。實際操作上，就是把${scenario.soundAZh}標成框架句，把${scenario.soundBZh}視為證據或例子，再把兩者拉回${scenario.topicZh}這條主線。當${scenario.challengeZh}時，這個方法特別有用，因為就算個別片語一時模糊，筆記仍能保住整體結構。之後再和${scenario.supportZh}一起檢視時，${person.name} 發現自己其實比當下感覺的理解得更準確。對${person.name} 而言，這再次證明了${scenario.takeawayZh}。`
+    },
+    reflection: {
+      en: `${person.name}'s experience at ${scenario.setting} reshaped a deeper assumption about listening. Previously, ${person.name} often treated comprehension as a test of raw speed: if the speech moved too quickly, success seemed impossible. This session complicated that belief. By following the thread from ${scenario.soundA} to ${scenario.soundB}, staying oriented around ${scenario.topic}, and persisting even when ${scenario.challenge}, ${person.name} recognized that listening growth depends not only on vocabulary, but also on tolerance for uncertainty and the ability to rebuild meaning after a brief loss of clarity. Support from ${scenario.support} reduced the pressure, but the real shift was internal. ${person.name} left convinced that ${scenario.takeaway}.`,
+      zh: `${person.name} 在${scenario.settingZh}中的經驗，改變了自己對聽力更深一層的假設。過去，${person.name} 常把理解力看成單純的語速測驗：只要講得太快，似乎就不可能成功。然而，這次活動讓這種想法變得複雜得多。透過一路追蹤從${scenario.soundAZh}到${scenario.soundBZh}的線索、持續圍繞${scenario.topicZh}保持方向感，並且在${scenario.challengeZh}時仍不放棄，${person.name} 逐漸意識到，聽力成長不只靠單字量，還仰賴對不確定感的耐受，以及在短暫漏聽後重新拼回意義的能力。${scenario.supportZh}的幫助降低了壓力，但真正的轉變其實來自內在。離開時，${person.name} 已經更相信${scenario.takeawayZh}。`
+    }
+  };
+
+  return templates[variant.id];
 }
 
 function buildArticle(level, serial, theme, person) {
